@@ -13,6 +13,11 @@ public class Main : MonoBehaviour
     // Organization Options Screen Vars
     public ToggleGroup oosRadioButtons;
 
+    // Class Vars
+    public string organizationName;
+    public string date;
+    public float itemWeightSum;
+    
     public void OOS_NextButton()
     {
         var toggle = oosRadioButtons.ActiveToggles().FirstOrDefault();
@@ -31,5 +36,18 @@ public class Main : MonoBehaviour
                 screens[i].SetActive(i == 2);
             }
         }
+    }
+
+    public void ONS_BackButton()
+    {
+        for (var i = 0; i < screens.Length; i++)
+        {
+            screens[i].SetActive(i == 0);
+        }
+    }
+
+    public void ONS_NextButton()
+    {
+        
     }
 }

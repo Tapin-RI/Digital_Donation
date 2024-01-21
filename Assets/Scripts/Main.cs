@@ -12,11 +12,6 @@ public class Main : MonoBehaviour
     
     // Organization Options Screen Vars
     public ToggleGroup oosRadioButtons;
-
-    // Class Vars
-    public string organizationName;
-    public string date;
-    public float itemWeightSum;
     
     public void OOS_NextButton()
     {

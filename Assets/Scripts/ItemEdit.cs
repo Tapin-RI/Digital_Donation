@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class ItemEdit : MonoBehaviour
 {
-    public Main main;
+    public RectTransform listViewContents;
+    public GameObject itemPrefab;
     
     public List<string> items = new List<string>();
 
@@ -17,7 +18,7 @@ public class ItemEdit : MonoBehaviour
     private void Start()
     {
         items.Add("");
-        main.IES_AddItemButton();
+        AddItem();
         NewObjLbl();
     }
 
@@ -35,11 +36,7 @@ public class ItemEdit : MonoBehaviour
             workingText = workingText.Remove(workingText.Length - 1, 1);
             items[workingIndex] = workingText;
             UpdateGUI();
-        }
-        catch
-        {
-            // ignore
-        }
+        } catch { /* ignore */ }
     }
 
     public void AddItem()
@@ -48,20 +45,44 @@ public class ItemEdit : MonoBehaviour
         workingText = "";
         workingIndex = items.Count - 1;
         NewObjLbl();
+        
+        var itemObjectArray = GameObject.FindGameObjectsWithTag("Item Object");
+
+        foreach (var obj in itemObjectArray)
+        {
+            var rectTransform = obj.GetComponent<RectTransform>();
+            rectTransform.position += new Vector3(0, 125, 0);
+        }
+        
+        listViewContents.sizeDelta += new Vector2(0, 125);
+        Instantiate(itemPrefab, listViewContents);
     }
 
     public void RemItem()
     {
         try
         {
+            if (workingIndex == 0) return;
+            
             items.RemoveAt(workingIndex);
             workingIndex = items.Count - 1;
             workingText = items[workingIndex];
-        }
-        catch
-        {
-            // ignore
-        }
+            
+            try
+            {
+                var itemObjectArray = GameObject.FindGameObjectsWithTag("Item Object");
+
+                foreach (var obj in itemObjectArray)
+                {
+                    var rectTransform = obj.GetComponent<RectTransform>();
+                    rectTransform.position -= new Vector3(0, 125, 0);
+                }
+        
+                listViewContents.sizeDelta -= new Vector2(0, 125);
+                Destroy(itemObjectArray[^1]);
+            }
+            catch { /* ignore */ }
+        } catch { /* ignore */ }
     }
 
     private void NewObjLbl()

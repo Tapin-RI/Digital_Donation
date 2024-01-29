@@ -38,34 +38,6 @@ public class Main : MonoBehaviour
         LoadScreen(2);
     }
 
-    public void IES_AddItemButton()
-    {
-        var itemObjectArray = GameObject.FindGameObjectsWithTag("Item Object");
-
-        foreach (var obj in itemObjectArray)
-        {
-            var rectTransform = obj.GetComponent<RectTransform>();
-            rectTransform.position += new Vector3(0, 125, 0);
-        }
-        
-        listViewContents.sizeDelta += new Vector2(0, 125);
-        Instantiate(itemObjectPrefab, listViewContents);
-    }
-    
-    public void IES_DeleteItemButton()
-    {
-        var itemObjectArray = GameObject.FindGameObjectsWithTag("Item Object");
-
-        foreach (var obj in itemObjectArray)
-        {
-            var rectTransform = obj.GetComponent<RectTransform>();
-            rectTransform.position -= new Vector3(0, 125, 0);
-        }
-        
-        listViewContents.sizeDelta -= new Vector2(0, 125);
-        Destroy(itemObjectArray[^1]);
-    }
-
     public void IES_NextButton()
     {
         

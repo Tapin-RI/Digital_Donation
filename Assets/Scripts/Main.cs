@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Main : MonoBehaviour
 {
@@ -11,38 +12,56 @@ public class Main : MonoBehaviour
     public GameObject[] screens;
     
     // Organization Options Screen Vars
+    [Header("Organization Options Screen")]
     public ToggleGroup oosRadioButtons;
+    
+    // Item Enter Screen Vars
+    [Header("Item Enter Screen")] 
+    public RectTransform listViewContents;
+    public GameObject itemObjectPrefab;
     
     public void OOS_NextButton()
     {
         var toggle = oosRadioButtons.ActiveToggles().FirstOrDefault();
 
-        if (toggle!.CompareTag("1"))
-        {
-            for (var i = 0; i < screens.Length; i++)
-            {
-                screens[i].SetActive(i == 1);
-            }
-        }
-        else
-        {
-            for (var i = 0; i < screens.Length; i++)
-            {
-                screens[i].SetActive(i == 2);
-            }
-        }
+        LoadScreen(toggle!.CompareTag("1") ? 1 : 2);
     }
 
     public void ONS_BackButton()
     {
-        for (var i = 0; i < screens.Length; i++)
-        {
-            screens[i].SetActive(i == 0);
-        }
+        LoadScreen(0);
     }
 
     public void ONS_NextButton()
     {
+        // TODO: Add save to variable for org name.
+        LoadScreen(2);
+    }
+
+    public void IES_AddItemButton()
+    {
+        var itemObjectArray = GameObject.FindGameObjectsWithTag("Item Object");
+
+        foreach (var obj in itemObjectArray)
+        {
+            var rectTransform = obj.GetComponent<RectTransform>();
+            rectTransform.position += new Vector3(0, 125, 0);
+        }
         
+        listViewContents.sizeDelta += new Vector2(0, 125);
+        Instantiate(itemObjectPrefab, listViewContents);
+    }
+
+    public void IES_NextButton()
+    {
+        
+    }
+
+    private void LoadScreen(int id)
+    {
+        for (var i = 0; i < screens.Length; i++)
+        {
+            screens[i].SetActive(i == id);
+        }
     }
 }

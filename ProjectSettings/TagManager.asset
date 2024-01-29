@@ -6,6 +6,8 @@ TagManager:
   tags:
   - 1
   - 0
+  - Item Object
+  - Item Object Label
   layers:
   - Default
   - TransparentFX

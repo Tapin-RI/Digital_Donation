@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,77 +7,74 @@ using UnityEngine;
 
 public class ItemEdit : MonoBehaviour
 {
-    public RectTransform listViewContents;
+    public Main main;
     
-    private string _numberOutput;
-    private GameObject _currentItem;
-    
-    public void EnterCharacter(string character)
+    public List<string> items = new List<string>();
+
+    public string workingText = "";
+    public int workingIndex = 0;
+
+    private void Start()
     {
-        var itemObjectList = GameObject.FindGameObjectsWithTag("Item Object");
-        
-        if (_currentItem == itemObjectList[^1])
-        {
-            var text = itemObjectList[^1].GetComponentInChildren<TMP_Text>();
-            _currentItem = itemObjectList[^1];
-        
-            _numberOutput += character;
-            text.text = _numberOutput + " lbs";
-        }
-        else
-        {
-            _numberOutput = "";
-            
-            var text = itemObjectList[^1].GetComponentInChildren<TMP_Text>();
-            _currentItem = itemObjectList[^1];
-        
-            _numberOutput += character;
-            text.text = _numberOutput + " lbs";
-        }
+        items.Add("");
+        main.IES_AddItemButton();
+        NewObjLbl();
     }
 
-    public void DeleteCharacter()
+    public void AddChar(string character)
+    {
+        workingText += character;
+        items[workingIndex] = workingText;
+        UpdateGUI();
+    }
+
+    public void RemChar()
     {
         try
         {
-            var itemObjectList = GameObject.FindGameObjectsWithTag("Item Object");
-            var text = itemObjectList[^1].GetComponentInChildren<TMP_Text>();
-            
-            _numberOutput = _numberOutput.Remove(_numberOutput.Length - 1, 1);
-            
-            text.text = _numberOutput + " lbs";
+            workingText = workingText.Remove(workingText.Length - 1, 1);
+            items[workingIndex] = workingText;
+            UpdateGUI();
         }
         catch
         {
             // ignore
         }
     }
-    
-    public void NewObjectLabel()
+
+    public void AddItem()
     {
-        var labelList = GameObject.FindGameObjectsWithTag("Item Object Label");
-        labelList[^1].GetComponent<TMP_Text>().text = "Item Number " + labelList.Length;
+        items.Add("");
+        workingText = "";
+        workingIndex = items.Count - 1;
+        NewObjLbl();
     }
 
-    public void DeleteItem()
+    public void RemItem()
     {
-        var itemObjectList = GameObject.FindGameObjectsWithTag("Item Object");
-
         try
         {
-            Destroy(itemObjectList[^1]);
-
-            foreach (var obj in itemObjectList)
-            {
-                var rectTransform = obj.GetComponent<RectTransform>();
-                rectTransform.position -= new Vector3(0, 125, 0);
-            }
-
-            listViewContents.sizeDelta -= new Vector2(0, 125);
+            items.RemoveAt(workingIndex);
+            workingIndex = items.Count - 1;
+            workingText = items[workingIndex];
         }
         catch
         {
-            // ignored
+            // ignore
         }
+    }
+
+    private void NewObjLbl()
+    {
+        var labelList = GameObject.FindGameObjectsWithTag("Item Object Label");
+        labelList[^1].GetComponent<TMP_Text>().text = "Item Number " + items.Count;
+    }
+
+    private void UpdateGUI()
+    {
+        var currentItems = GameObject.FindGameObjectsWithTag("Item Object");
+        var currentItemText = currentItems[^1].GetComponentInChildren<TMP_Text>();
+
+        currentItemText.text = workingText + " lbs";
     }
 }

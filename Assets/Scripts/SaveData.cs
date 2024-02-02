@@ -9,7 +9,7 @@ public class SaveData : MonoBehaviour
 {
     private void Start()
     {
-        var scriptPath = Path.Combine(Application.dataPath, "Scripts\\SaveData.py");
+        var scriptPath = Path.Combine(Application.dataPath, @"Scripts\Python Uploader\SaveData.py");
         PythonRunner.RunFile(scriptPath);
     }
 }

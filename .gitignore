@@ -77,3 +77,6 @@ crashlytics-build.properties
 BUILD/
 *.meta
 Assets/Scripts/Python Uploader/Creds.csv
+Assets/SAVE_DATA/export.csv
+*.meta
+*.meta

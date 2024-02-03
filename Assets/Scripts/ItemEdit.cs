@@ -7,10 +7,10 @@ public class ItemEdit : MonoBehaviour
     public RectTransform listViewContents;
     public GameObject itemPrefab;
     
-    public List<string> items = new List<string>();
+    public List<string> items = new();
 
     public string workingText = "";
-    public int workingIndex = 0;
+    public int workingIndex;
 
     private void Start()
     {

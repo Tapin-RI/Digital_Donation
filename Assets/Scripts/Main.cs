@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -18,12 +19,27 @@ public class Main : MonoBehaviour
     // Organization Options Screen Vars
     [Header("Organization Options Screen")]
     public ToggleGroup oosRadioButtons;
+    public TMP_Dropdown oosOrganizationNameDropdown;
     
     // Item Enter Screen Vars
     [Header("Item Enter Screen")] 
     public RectTransform listViewContents;
     public GameObject itemObjectPrefab;
     public ItemEdit itemEdit;
+
+    private void Start()
+    {
+        var saveDirectory = Application.dataPath + "/OrganizationAccounts.csv"; // Generates required directory.
+
+        List<string> a = new List<string>();
+        
+        // Reads the string, then formats it for return.
+        var loadString = File.ReadAllText(saveDirectory);
+        var loadContents = loadString.Split(",");
+        var loadContentsList = new List<string>(loadContents);
+
+        oosOrganizationNameDropdown.AddOptions(loadContentsList);
+    }
     
     public void OOS_NextButton()
     {

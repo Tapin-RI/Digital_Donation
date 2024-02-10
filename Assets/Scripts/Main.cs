@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -19,31 +20,21 @@ public class Main : MonoBehaviour
     // Organization Options Screen Vars
     [Header("Organization Options Screen")]
     public ToggleGroup oosRadioButtons;
-    public TMP_Dropdown oosOrganizationNameDropdown;
     
     // Item Enter Screen Vars
     [Header("Item Enter Screen")] 
     public RectTransform listViewContents;
     public GameObject itemObjectPrefab;
     public ItemEdit itemEdit;
-
-    private void Start()
-    {
-        var saveDirectory = Application.dataPath + "/OrganizationAccounts.csv"; // Generates required directory.
-
-        List<string> a = new List<string>();
-        
-        // Reads the string, then formats it for return.
-        var loadString = File.ReadAllText(saveDirectory);
-        var loadContents = loadString.Split(",");
-        var loadContentsList = new List<string>(loadContents);
-
-        oosOrganizationNameDropdown.AddOptions(loadContentsList);
-    }
     
     public void OOS_NextButton()
     {
         var toggle = oosRadioButtons.ActiveToggles().FirstOrDefault();
+
+        if (toggle != null && toggle.CompareTag("0"))
+        {
+            itemEdit.orgName = "0013h00000QYlflAAD";
+        }
 
         LoadScreen(toggle!.CompareTag("1") ? 1 : 2);
     }
@@ -55,7 +46,7 @@ public class Main : MonoBehaviour
 
     public void ONS_NextButton()
     {
-        // TODO: Add save to variable for org name.
+        itemEdit.orgName = GetComponent<Accounts>().accountIds[GetComponent<Accounts>().dropdown.value];
         LoadScreen(2);
     }
 
@@ -88,7 +79,7 @@ public class Main : MonoBehaviour
         
         var items = itemEdit.items;
 
-        var saveString = "0013h00000QYlflAAD,";
+        var saveString = itemEdit.orgName + ",";
         saveString += string.Join(",", items);
         var saveDirectory = Application.dataPath + "/SAVE_DATA/export.csv";
         
@@ -96,6 +87,7 @@ public class Main : MonoBehaviour
         
         GetComponent<SaveData>().UploadData();
         Debug.Log("Uploaded");
+        LoadScreen(0);
     }
 
     private void LoadScreen(int id)

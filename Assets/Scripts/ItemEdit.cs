@@ -6,7 +6,8 @@ public class ItemEdit : MonoBehaviour
 {
     public RectTransform listViewContents;
     public GameObject itemPrefab;
-    
+
+    public string orgName = "";
     public List<string> items = new();
 
     public string workingText = "";

@@ -28,10 +28,10 @@ with open(directory + "\\Assets\\SAVE_DATA\\export.csv") as csvfile:
     weight_sum = 0
 
     for i in range(1, len(items[0])):
-        weight_sum += int(items[0][i])
+        weight_sum += float(items[0][i])
 
     acquisition_values = {
-        "Account__c": "0013h00000QYlflAAD",
+        "Account__c": org_name,
         "Weight__c": weight_sum,
         "Tapin_Expense__c": "0"
     }

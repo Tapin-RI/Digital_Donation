@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -76,9 +77,9 @@ public class Main : MonoBehaviour
     private IEnumerator UploadData()
     {
         yield return new WaitForSeconds(5f);
-        
-        var items = itemEdit.items;
 
+        var items = itemEdit.items;
+        
         var saveString = itemEdit.orgName + ",";
         saveString += string.Join(",", items);
         var saveDirectory = Application.dataPath + "/SAVE_DATA/export.csv";

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -6,12 +7,11 @@ public class ItemEdit : MonoBehaviour
 {
     public RectTransform listViewContents;
     public GameObject itemPrefab;
-
-    public string orgName = "";
-    public List<string> items = new();
+    
+    public List<string> items = new List<string>();
 
     public string workingText = "";
-    public int workingIndex;
+    public int workingIndex = 0;
 
     private void Start()
     {
@@ -20,9 +20,16 @@ public class ItemEdit : MonoBehaviour
 
     public void AddChar(string character)
     {
+        if (character == ".")
+        {
+            if (workingText.Any(t => t == "."[0]))
+            {
+                return;
+            }
+        }
+        
         workingText += character;
         items[workingIndex] = workingText;
-        UpdateGUI();
     }
 
     public void RemChar()
@@ -31,7 +38,6 @@ public class ItemEdit : MonoBehaviour
         {
             workingText = workingText.Remove(workingText.Length - 1, 1);
             items[workingIndex] = workingText;
-            UpdateGUI();
         } catch { /* ignore */ }
     }
 
@@ -42,7 +48,7 @@ public class ItemEdit : MonoBehaviour
         workingIndex = items.Count - 1;
         
         var itemObjectArray = GameObject.FindGameObjectsWithTag("Item Object");
-
+        
         foreach (var obj in itemObjectArray)
         {
             var rectTransform = obj.GetComponent<RectTransform>();
@@ -84,7 +90,7 @@ public class ItemEdit : MonoBehaviour
         labelList[^1].GetComponent<TMP_Text>().text = "Item Number " + items.Count;
     }
 
-    private void UpdateGUI()
+    private void FixedUpdate()
     {
         var currentItems = GameObject.FindGameObjectsWithTag("Item Object");
         var currentItemText = currentItems[^1].GetComponentInChildren<TMP_Text>();

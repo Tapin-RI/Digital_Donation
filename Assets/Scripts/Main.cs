@@ -2,21 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class Main : MonoBehaviour
 {
+    private string organizationName;
     private Coroutine _coroutine = null;
     
-    // Screen Vars
+    // Utility Vars
     public GameObject[] screens;
+    public ItemEdit itemEdit;
+    public Accounts accounts;
     
     // Organization Options Screen Vars
     [Header("Organization Options Screen")]
@@ -26,17 +27,16 @@ public class Main : MonoBehaviour
     [Header("Item Enter Screen")] 
     public RectTransform listViewContents;
     public GameObject itemObjectPrefab;
-    public ItemEdit itemEdit;
     
     public void OOS_NextButton()
     {
         var toggle = oosRadioButtons.ActiveToggles().FirstOrDefault();
 
-        if (toggle != null && toggle.CompareTag("0"))
+        if (toggle!.CompareTag("0"))
         {
-            itemEdit.orgName = "0013h00000QYlflAAD";
+            organizationName = "0013h00000QYlflAAD";
         }
-
+        
         LoadScreen(toggle!.CompareTag("1") ? 1 : 2);
     }
 
@@ -47,48 +47,21 @@ public class Main : MonoBehaviour
 
     public void ONS_NextButton()
     {
-        itemEdit.orgName = GetComponent<Accounts>().accountIds[GetComponent<Accounts>().dropdown.value];
+        organizationName = accounts.accountIds[accounts.dropdown.value];
+        
         LoadScreen(2);
     }
 
     public void IES_NextButton()
     {
-        _coroutine = StartCoroutine(UploadData()); 
-        
+        _coroutine = StartCoroutine(UploadData());
         LoadScreen(3);
     }
-    
-    private bool csBackButton = false;
-    public void CS_BackButton()
-    {
-        csBackButton = true;
-        LoadScreen(2);
-    }
 
-    private void FixedUpdate()
+    public void CS_CancelButton()
     {
-        if (!csBackButton) return;
         StopCoroutine(_coroutine);
-        csBackButton = false; 
-        Debug.Log("Stopped");
-    }
-
-    
-    private IEnumerator UploadData()
-    {
-        yield return new WaitForSeconds(5f);
-
-        var items = itemEdit.items;
-        
-        var saveString = itemEdit.orgName + ",";
-        saveString += string.Join(",", items);
-        var saveDirectory = Application.dataPath + "/SAVE_DATA/export.csv";
-        
-        File.WriteAllText(saveDirectory, saveString);
-        
-        GetComponent<SaveData>().UploadData();
-        Debug.Log("Uploaded");
-        LoadScreen(0);
+        LoadScreen(2);
     }
 
     private void LoadScreen(int id)
@@ -97,5 +70,26 @@ public class Main : MonoBehaviour
         {
             screens[i].SetActive(i == id);
         }
+    }
+
+    private void ClearItemScreen()
+    {
+        itemEdit.items[0] = "";
+        itemEdit.workingText = "";
+        itemEdit.workingIndex = 0;
+        foreach (var item in itemEdit.items)
+        {
+            itemEdit.RemItem();
+        }
+    }
+
+    private IEnumerator UploadData()
+    {
+        yield return new WaitForSeconds(3f);
+        var sum = itemEdit.items.Sum(float.Parse);
+        
+        GetComponent<SaveData>().UploadData(organizationName, sum.ToString());
+        ClearItemScreen();
+        LoadScreen(0);
     }
 }

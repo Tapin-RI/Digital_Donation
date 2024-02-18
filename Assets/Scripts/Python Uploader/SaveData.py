@@ -1,38 +1,28 @@
 from simple_salesforce import Salesforce
-import csv
-import os
+from flask import Flask, request
 
-# Anonymous Account ID: 0013h00000QYlflAAD
+app = Flask(__name__)
 
-directory = os.getcwd()
+@app.route('/', methods=['POST'])
+def UploadData():
+    # Salesforce Authentication Values
+    username = request.form.get("username")
+    password = request.form.get("password")
+    token = request.form.get("token")
 
-username = ""
-password = ""
-token = ""
-
-with open(directory + "\\Assets\\Scripts\\Python Uploader\\Creds.csv") as csvfile:
-    reader = csv.reader(csvfile)
-    items = list(reader)
+    # Item Data Values
+    organization = request.form.get("organization")
+    item_sum = request.form.get("sum")
 
     sf = Salesforce(
-        username=items[0][0],
-        password=items[0][1],
-        security_token=items[0][2]
+        username=username,
+        password=password,
+        security_token=token
     )
 
-with open(directory + "\\Assets\\SAVE_DATA\\export.csv") as csvfile:
-    reader = csv.reader(csvfile)
-    items = list(reader)
-
-    org_name = items[0][0]
-    weight_sum = 0
-
-    for i in range(1, len(items[0])):
-        weight_sum += float(items[0][i])
-
     acquisition_values = {
-        "Account__c": org_name,
-        "Weight__c": weight_sum,
+        "Account__c": organization,
+        "Weight__c": item_sum,
         "Tapin_Expense__c": "0"
     }
 

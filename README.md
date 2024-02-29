@@ -4,7 +4,7 @@ Digital Donation is a mobile application designed for the Samsung Galaxy Tab A7 
 ## Installation
 To install Digital Donation to a device, please follow these steps:
 1. Download the latest version of the application "Releases" page on GitHub.
-2. Using a computer running Windows/MacOS/Linux, install the Unity app (see [unity.com](unity.com) for details).
+2. Using a computer running Windows/MacOS/Linux, install the Unity app (see [unity.com](https://www.unity.com) for details).
 3. Plug in your Galaxy Tab A7 Lite and build the application to the tablet (there are many tutorials online to learn this step).
 ## Usage
 To use Digital Donation, please follow these steps carefully:

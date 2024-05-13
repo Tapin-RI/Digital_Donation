@@ -47,6 +47,8 @@ public class Main : MonoBehaviour
 
     public void ONS_NextButton()
     {
+        // TODO: Add all accounts to the list in Accounts.
+        Debug.Log(accounts.dropdown.value);
         organizationName = accounts.accountIds[accounts.dropdown.value];
         
         LoadScreen(2);
@@ -77,6 +79,7 @@ public class Main : MonoBehaviour
         itemEdit.items[0] = "";
         itemEdit.workingText = "";
         itemEdit.workingIndex = 0;
+        
         foreach (var item in itemEdit.items)
         {
             itemEdit.RemItem();

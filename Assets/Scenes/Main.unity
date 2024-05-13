@@ -2359,7 +2359,7 @@ Animator:
   m_GameObject: {fileID: 869937314}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2bd5c96bdc61d634894d77323c364086, type: 2}
+  m_Controller: {fileID: 9100000, guid: 20769c0f91877ae479bb66c2e6d3b510, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2391,7 +2391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1259784310, guid: 74969aec756fd8e46b709a8396e77f6e, type: 3}
+  m_Sprite: {fileID: -2914503216214332612, guid: 1345758eaf411d0449b02d7dfb5e23df, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2486,81 +2486,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 919579072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b12875691fe3d74692b1d8d6ad92780, type: 3}
+  m_Script: {fileID: 11500000, guid: 8809d34c16a13684a8b7b57baa8b6e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accountNames:
-  - Barrington Congregational Church
-  - Barrington Garden Club
-  - Barrington High School
-  - Barrington Middle School
-  - Barrington Presbyterian Church
-  - Barrington Public Library
-  - Barrington United Methodist Church
-  - Bayside YMCA
-  - Boy Scouts
-  - Early Minds Child Care
-  - Feminine Fancies
-  - Girl Scout Troop 723
-  - Girl Scout Troops 972 & 471
-  - Hampden Meadows School
-  - Mail Carrier Drive
-  - McCoy Community Farm
-  - Montessori Centre of Barrington
-  - Nyatt School
-  - Primrose Hill School
-  - Shaw's
-  - Shaws BIN
-  - Sowams School
-  - St James Lutheran Church
-  - St John's Episcopal Church
-  - St Luke's Catholic Church
-  - St Luke's Outreach
-  - St. Luke's School
-  - Saints Matthew and Mark Church
-  - Starbucks
-  - Store 30
-  - Sweet Lorraine's
-  - Tap-In
-  - Temple Habonim
-  - Tiffanys Spa
-  - Vienna Bakery
-  accountIds:
-  - 0013h00000QYldwAAD
-  - 0013h00000QYldxAAD
-  - 0013h00000QYldyAAD
-  - 0013h00000QYldzAAD
-  - 0013h00000QYle0AAD
-  - 0013h00000QYle1AAD
-  - 0013h00000QYle2AAD
-  - 0013h00000QYle4AAD
-  - 0013h00000QYle5AAD
-  - 0013h00000QYle6AAD
-  - 0013h00000QYle7AAD
-  - 0013h00000QYle8AAD
-  - 0013h00000QYle9AAD
-  - 0013h00000QYleAAAT
-  - 0013h00000QYleBAAT
-  - 0013h00000QYleCAAT
-  - 0013h00000QYleDAAT
-  - 0013h00000QYleEAAT
-  - 0013h00000QYleFAAT
-  - 0013h00000QYleHAAT
-  - 0013h00000QYleIAAT
-  - 0013h00000QYleJAAT
-  - 0013h00000QYleKAAT
-  - 0013h00000QYleLAAT
-  - 0013h00000QYleMAAT
-  - 0013h00000QYleNAAT
-  - 0013h00000QYleOAAT
-  - 0013h00000QYleQAAT
-  - 0013h00000QYleRAAT
-  - 0013h00000QYleSAAT
-  - 0013h00000QYleTAAT
-  - 0013h00000QYleUAAT
-  - 0013h00000QYleVAAT
-  - 0013h00000QYleWAAT
-  - 0013h00000QYleXAAT
+  accountNames: []
+  accountIds: []
   dropdown: {fileID: 70534505}
 --- !u!1 &934371549
 GameObject:

@@ -1,6 +1,6 @@
 # Digital Donation
 ## About
-Digital Donation is a mobile application designed for the Samsung Galaxy Tab A7 Lite. This app provides an intuitive and modern graphical user interface that makes it easy for volunteers of all skill levels to use. Digital Donation allows Tapin volunteers to quickly and efficiently enter the weights of non-monetary donations into the Salesforce database using a Python API.
+Digital Donation is a mobile application designed for the **Samsung Galaxy Tab A7 Lite**. This app provides an intuitive and modern graphical user interface that makes it easy for volunteers of all skill levels to use. Digital Donation allows Tapin volunteers to quickly and efficiently enter the weights of non-monetary donations into the Salesforce database using a Python API.
 ## Installation
 To install Digital Donation to a device, please follow these steps:
 1. Download the latest version of the application "Releases" page on GitHub.
